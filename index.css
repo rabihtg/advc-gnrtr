@@ -1,0 +1,140 @@
+:root {
+  /* Primary */
+  --Light-Cyan: hsl(193, 38%, 86%);
+  --Neon-Green: hsl(150, 100%, 66%);
+  /* Neutral */
+  --Grayish-Blue: hsl(218, 20%, 24%);
+  --Dark-Grayish-Blue: hsl(220, 22%, 16%);
+  /* Fonts */
+  --ff-sans: "Manrope", Arial, sans-serif;
+}
+/* -------------------------------------------------- Global
+----------------------------------------------------------------------------  */
+html {
+  font-size: 28px;
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  font-size: 28px;
+  margin: 0;
+  background-color: var(--Dark-Grayish-Blue);
+  font-family: var(--ff-sans);
+}
+@media (min-width: 768px) {
+  .desktop-hidden {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+/* -------------------------------------------------- main
+----------------------------------------------------------------------------  */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.advice-card {
+  max-width: 500px;
+  width: 95%;
+  padding-block: 1rem 2rem;
+  padding-inline: clamp(0.1rem, 5.5vw, 1rem);
+  background-color: var(--Grayish-Blue);
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+}
+.advice-id {
+  font-size: 0.35rem;
+  color: var(--Neon-Green);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.advice {
+  color: var(--Light-Cyan);
+  font-size: clamp(0.85rem, 5vw, 0.95rem);
+  line-height: 1.5;
+  margin-block: 0.5em;
+}
+.advice.changing {
+  animation: swoop-in 2s cubic-bezier(0.1, 1, 0.5, 1.5) 0s 1 forwards;
+}
+@keyframes swoop-in {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.dice-icon-cont {
+  position: absolute;
+  user-select: none;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: var(--Neon-Green);
+  padding: 0.5rem 0.75rem;
+  border-radius: 50%;
+  z-index: 9;
+}
+.dice-icon-cont.active {
+  animation: fade-in-out 200ms linear 0s infinite forwards;
+}
+@keyframes fade-in-out {
+  0% {
+    background-color: var(--Neon-Green);
+  }
+  50% {
+    background-color: #888;
+  }
+  100% {
+    background-color: var(--Neon-Green);
+  }
+}
+.divider-cont {
+  display: flex;
+  justify-content: center;
+}
+@media (hover: hover) {
+  .dice-icon-cont::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    z-index: 99;
+    background-color: transparent;
+    box-shadow: 0 0 30px var(--Neon-Green);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+  }
+  .dice-icon-cont:hover::after {
+    opacity: 1;
+  }
+  .active.dice-icon-cont::after {
+    animation: op-in-out 2.5s linear 0s 1 forwards;
+  }
+  @keyframes op-in-out {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
